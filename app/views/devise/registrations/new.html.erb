@@ -1,0 +1,36 @@
+<div class="bg-white shadow-md rounded-lg overflow-hidden">
+  <div class="bg-blue-500 px-6 py-4">
+  <h1 class="text-white text-3xl">Session Report</h1>
+    <h2 class="text-white text-3xl font-bold">Sign up</h2>
+  </div>
+  
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "px-6 py-4" }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="mb-4">
+      <%= f.label :email, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :password, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <% if @minimum_password_length %>
+        <p class="text-xs text-gray-600 mb-1"><em>(<%= @minimum_password_length %> characters minimum)</em></p>
+      <% end %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="mb-6">
+      <%= f.label :password_confirmation, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <%= f.submit "Sign up", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+    </div>
+  <% end %>
+
+  <div class="px-6 py-4">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>
