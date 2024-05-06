@@ -1,0 +1,14 @@
+<div class="bg-white shadow-md rounded-lg overflow-hidden">
+  <div class="bg-blue-500 px-6 py-4">
+    <h1 class="text-white text-3xl font-bold">Editing report</h1>
+  </div>
+  
+  <div class="px-6 py-4">
+    <%= render "form", report: @report %>
+    
+    <div class="mt-8 flex justify-between items-center">
+      <%= link_to "Show this report", @report, class: "text-blue-500 hover:underline" %>
+      <%= link_to "Back to reports", reports_path, class: "text-blue-500 hover:underline" %>
+    </div>
+  </div>
+</div>
