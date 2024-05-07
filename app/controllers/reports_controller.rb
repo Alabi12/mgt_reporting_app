@@ -40,12 +40,13 @@ class ReportsController < ApplicationController
     end
   end
 
-  def authenticate_user
-    unless current_user
-      flash[:alert] = "You need to sign in or sign up before continuing."
-      redirect_to new_user_session_path
+  def authorize_user!
+    unless current_user.admin? || (@report && @report.user == current_user)
+      flash[:alert] = "You are not authorized to perform this action."
+      redirect_to @report || root_path
     end
   end
+  
 
   # PATCH/PUT /reports/1 or /reports/1.json
   def update
