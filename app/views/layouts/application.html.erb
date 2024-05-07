@@ -24,6 +24,11 @@
 
   <body class="bg-gray-100">
     <div class="mx-auto max-w-lg px-4">
+    <nav>
+    <% if user_signed_in? %>
+      <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+    <% end %>
+  </nav>
       <%= yield %>
     </div>
   </body>
