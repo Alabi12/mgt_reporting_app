@@ -3,17 +3,13 @@
     <h1 class="text-white text-3xl font-bold">Zimmermann Session, Nungua</h1>
     <h2 class="text-white text-3xl font-bold">New report</h2>
   </div>
-  
+
   <div class="px-6 py-4">
     <%= render "form", report: @report %>
-    
+
     <div class="mt-8 flex justify-between items-center">
       <%= link_to "Back to reports", reports_path, class: "text-blue-500 hover:underline" %>
       <%= link_to "Cancel", reports_path, class: "text-gray-500 hover:underline" %>
     </div>
   </div>
-</div>
-
-<div class="mt-4 px-6 py-2">
-  <%= link_to "Sign out", destroy_user_path, method: :delete "text-blue-500 hover:underline" %>
 </div>
