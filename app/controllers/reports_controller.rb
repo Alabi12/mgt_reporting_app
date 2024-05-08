@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
-  before_action :set_report, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, only: [:edit, :update, :destroy]
+  before_action :set_report, only: [:show, :update, :edit]
+  # before_action :authorize_user!, only: [:edit, :update, :destroy]
 
   # GET /reports
   def index
@@ -22,8 +22,7 @@ class ReportsController < ApplicationController
 
   # POST /reports
   def create
-    @report = Report.new(report_params)
-
+    @report= current_user.reports.build(report_params)
     if @report.save
       redirect_to @report, notice: "Report was successfully created."
     else
@@ -31,34 +30,38 @@ class ReportsController < ApplicationController
     end
   end
 
+  def destroy
+    @report = Report.find(params[:id])
+    @report.destroy
+    redirect_to reports_url, notice: "Report was successfully deleted."
+  end
+  
   # PATCH/PUT /reports/1
   def update
-    if @report.update(report_params)
-      redirect_to @report, notice: "Report was successfully updated."
-    else
-      render :edit, status: :unprocessable_entity
+    respond_to do |format|
+      if @report.update(report_params)
+        format.html { redirect_to @report, notice: 'Report was successfully updated.' }
+        format.json { render :show, status: :ok, location: @report }
+      else
+        format.html { render :edit }
+        format.json { render json: @report.errors, status: :unprocessable_entity }
+      end
     end
   end
-
-  # DELETE /reports/1
-  def destroy
-    @report.destroy
-    redirect_to reports_url, notice: "Report was successfully destroyed."
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_report
+    @report = Report.find(params[:id])
   end
 
   private
-    def set_report
-      @report = Report.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_report
+    @report = Report.find(params[:id])
+  end
+
 
     def report_params
       params.require(:report).permit(:date, :observation, :risk_level, :recommendation, :action_plan, :timelines, :members_on_duty)
-    end
-
-    def authorize_user!
-      unless current_user.admin? || (@report && @report.user == current_user)
-        flash[:alert] = "You are not authorized to perform this action."
-        redirect_to @report || root_path
-      end
     end
 end
