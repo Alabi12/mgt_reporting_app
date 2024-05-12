@@ -1,6 +1,6 @@
 databases:
   - name: session_reporting
-    databaseName: session_reporting
+    databaseName: personal_projects
     user: session_reporting
     plan: free
 
