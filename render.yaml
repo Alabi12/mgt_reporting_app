@@ -7,7 +7,7 @@ databases:
 services:
   - type: web
     name: session_reporting
-    runtime: ruby
+    runtime: static
     plan: free
     buildCommand: "./bin/render-build.sh"
     # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
@@ -21,3 +21,7 @@ services:
         sync: false
       - key: WEB_CONCURRENCY
         value: 2 # sensible default
+        repo: https://github.com/Alabi12/mgt_reporting_app
+        buildCommand: npm install && npm run build
+        staticPublishPath: build
+        version: "1"
