@@ -1,21 +1,13 @@
 databases:
-
   - name: session_reporting
     databaseName: personal_projects
     user: session_reporting
-
-  - name: reporting
-    databaseName: reporting
-    user: reporting
-
     plan: free
+
 services:
   - type: web
     name: session_reporting
     runtime: static
-
-    name: reporting
-    runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"
     # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
@@ -24,14 +16,9 @@ services:
       - key: DATABASE_URL
         fromDatabase:
           name: session_reporting
-
-          name: reporting
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
       - key: WEB_CONCURRENCY
         value: 2 # sensible default
-        repo: https://github.com/Alabi12/mgt_reporting_app
-        buildCommand: npm install && npm run build
-        staticPublishPath: build
-        version: "1"
+        
