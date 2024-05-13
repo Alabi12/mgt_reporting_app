@@ -9,13 +9,14 @@ Rails.application.configure do
   config.database = {
     adapter: "postgresql",
     database: "session_reporting_database",
-    username:" postgres"
-    password:" wolo"
+    username: "postgres", # corrected syntax
+    password: "wolo",     # corrected syntax
     host: "localhost",
     port: 5432,
     pool: 5,
     timeout: 5000
   }
+  
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
@@ -36,16 +37,8 @@ Rails.application.configure do
   # Disable serving static files from `public/`, relying on NGINX/Apache to do so instead.
   # config.public_file_server.enabled = false
 
-  # Compress CSS using a preprocessor.
-  # config.assets.css_compressor = :sass
-
   # Do not fall back to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true
-  
-  # RAILS_ENV=production bundle exec rake assets:precompile
-
-
-  # config.assets.compile = false
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
