@@ -3,6 +3,19 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.environment = :production
+
+  # Configure your database connection
+  config.database = {
+    adapter: "postgresql",
+    database: "session_reporting_database",
+    username:" postgres"
+    password:" wolo"
+    host: "localhost",
+    port: 5432,
+    pool: 5,
+    timeout: 5000
+  }
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
