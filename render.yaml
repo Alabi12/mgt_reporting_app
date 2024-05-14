@@ -1,12 +1,12 @@
 databases:
-  - name: session_reporting
-    databaseName: personal_projects
-    user: session_reporting
+  - name: postgresql
+    databaseName: postgresql
+    user: wolo
     plan: free
 
 services:
   - type: web
-    name: session_reporting
+    name: postgresql
     runtime: static
     plan: free
     buildCommand: "./bin/render-build.sh"
@@ -15,7 +15,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: session_reporting
+          name: postgresql
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
