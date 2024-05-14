@@ -3,11 +3,10 @@ databases:
     databaseName: postgresql
     user: wolo
     plan: free
-
 services:
   - type: web
     name: postgresql
-    runtime: static
+    runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"
     # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
@@ -21,4 +20,3 @@ services:
         sync: false
       - key: WEB_CONCURRENCY
         value: 2 # sensible default
-        
