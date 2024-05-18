@@ -17,7 +17,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  port: 5433
+  port: 5432
   username: postgres
   password: wolo
 
@@ -28,7 +28,7 @@ default: &default
 development:
   <<: *default
   database: session_reporting_development
-  port: 5433
+  port: 5432
   username: postgres
   password: wolo
 
@@ -65,7 +65,7 @@ development:
 test:
   <<: *default
   database: session_reporting_test
-  port: 5433
+  port: 5432
   username: postgres
   password: wolo
 
@@ -91,7 +91,7 @@ production:
   username: postgres
   password: wolo
   host: 10.215.212.114
-  port: 5433
+  port: 5432
 
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
