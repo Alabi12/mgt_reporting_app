@@ -86,12 +86,12 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: session_reporting
   pool: 5
+  host: 10.215.212.114
+  port: 5433
   username: postgres
   password: wolo
-  host: 10.215.212.114
-  port: 5432
+  database: session_reporting
 
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
