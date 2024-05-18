@@ -84,11 +84,14 @@ test:
 # URL environment variable explicitly:
 #
 production:
-  <<: *default
-  # database: session_reporting_production
-  # port: 5432
-  url: <%= ENV["DATABASE_URL"] %>
-  # secret_key_base: <%= File.read(Rails.root.join('config', 'master.key')).strip %>
+  adapter: postgresql
+  encoding: unicode
+  database: session_reporting
+  pool: 5
+  username: postgres
+  password: wolo
+  host: 10.215.212.114
+  port: 5433
 
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
