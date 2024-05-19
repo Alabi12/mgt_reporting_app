@@ -15,11 +15,13 @@
   </p>
 
   <p class="px-4 py-4">
+
     <strong class="text-gray-800">Status:</strong>
     <%= report.status.present? ? report.status.humanize : "N/A" %>
   </p>
 
   <p class="px-4 py-4">
+
     <strong class="text-gray-800">Recommendation:</strong>
     <%= report.recommendation %>
   </p>
@@ -30,7 +32,12 @@
   </p>
 
   <p class="px-4 py-4">
-    <strong class="text-gray-800">Timelines:</strong>
-    <%= report.timelines %>
+    <strong class="text-gray-800">Group:</strong>
+    <%= report.group %>
+  </p>
+  
+  <p class="px-4 py-4">
+    <strong class="text-gray-800">Attendance:</strong>
+    <%= report.attendance %>
   </p>
 </div>
