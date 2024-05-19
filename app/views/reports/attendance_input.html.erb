@@ -1,0 +1,17 @@
+<h1>Input Attendance for <%= params[:group] %></h1>
+
+<%= form_with(url: attendance_path, method: :post, local: true) do |form| %>
+  <div class="mb-6">
+    <%= form.label :group, "Group", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.text_field :group, value: params[:group], readonly: true, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :attendance, "Number of Attendance", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.number_field :attendance, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.submit "Submit Attendance", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+  </div>
+<% end %>

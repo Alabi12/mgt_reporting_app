@@ -14,10 +14,10 @@
     <%= report.observation %>
   </p>
 
-  <p class="px-4 py-4">
-    <strong class="text-gray-800">Risk level:</strong>
-    <%= report.risk_level %>
-  </p>
+ <p class="px-4 py-4">
+  <strong class="text-gray-800">Status:</strong>
+  <%= report.status.present? ? report.status.humanize : 'Unknown' %>
+</p>
 
   <p class="px-4 py-4">
     <strong class="text-gray-800">Recommendation:</strong>
@@ -30,7 +30,12 @@
   </p>
 
   <p class="px-4 py-4">
-    <strong class="text-gray-800">Timelines:</strong>
-    <%= report.timelines %>
+    <strong class="text-gray-800">Group:</strong>
+    <%= report.group %>
+  </p>
+  
+  <p class="px-4 py-4">
+    <strong class="text-gray-800">Attendance:</strong>
+    <%= report.attendance %>
   </p>
 </div>

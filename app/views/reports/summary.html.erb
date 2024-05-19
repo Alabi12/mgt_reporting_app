@@ -1,0 +1,45 @@
+<h1 class="text-2xl font-semibold mb-6">Attendance Summary</h1>
+
+<table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+  <thead>
+    <tr>
+      <th class="py-3 px-4 bg-gray-100 border-b border-gray-300 text-left">Date</th>
+      <th class="py-3 px-4 bg-gray-100 border-b border-gray-300 text-left">Group</th>
+      <th class="py-3 px-4 bg-gray-100 border-b border-gray-300 text-left">Attendance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @date_group_attendance.each do |date, group_attendance| %>
+      <% group_attendance.each do |group, attendance| %>
+        <tr>
+          <td class="py-3 px-4 border-b border-gray-300 text-left"><%= date %></td>
+          <td class="py-3 px-4 border-b border-gray-300 text-left"><%= group %></td>
+          <td class="py-3 px-4 border-b border-gray-300 text-left"><%= attendance %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<h1 class="text-2xl font-semibold mt-8 mb-6">Summary of Group Attendance</h1>
+
+<table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+  <thead>
+    <tr>
+      <th class="py-3 px-4 bg-gray-100 border-b border-gray-300 text-left">Group</th>
+      <th class="py-3 px-4 bg-gray-100 border-b border-gray-300 text-left">Total Attendance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @group_attendance.each do |group, attendance| %>
+      <tr>
+        <td class="py-3 px-4 border-b border-gray-300 text-left"><%= group %></td>
+        <td class="py-3 px-4 border-b border-gray-300 text-left"><%= attendance %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="mt-6">
+  <%= link_to "Back to Reports", reports_path, class: "text-blue-500 hover:underline" %>
+</div>
