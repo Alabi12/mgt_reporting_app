@@ -1,5 +1,10 @@
+
 <%= form_with(model: @report, local: true, class: "bg-white shadow-md rounded px-8 py-8 mb-8") do |form| %>
   <% if @report.errors.any? %>
+
+<%= form_with(model: report, class: "bg-white shadow-md rounded px-8 py-8 mb-8") do |form| %>
+  <% if report.errors.any? %>
+
     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
       <strong class="font-bold"><%= pluralize(@report.errors.count, "error") %> prohibited this report from being saved:</strong>
       <ul>
@@ -10,15 +15,23 @@
     </div>
   <% end %>
 
+
+
+  <%# Date Field %>
+
   <div class="mb-6">
     <%= form.label :date, class: "block text-gray-700 text-sm font-bold mb-2" %>
-    <%= form.date_field :date, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    <%= form.date_field :date, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", id: 'date-field' %>
   </div>
+
+
+  <%# Members On Duty Field %>
 
   <div class="mb-6">
     <%= form.label :members_on_duty, class: "block text-gray-700 text-sm font-bold mb-2" %>
-    <%= form.text_field :members_on_duty, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    <%= form.text_field :members_on_duty, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", id: 'members-on-duty-field' %>
   </div>
+
 
   <div class="mb-6">
     <%= form.label :observation, class: "block text-gray-700 text-sm font-bold mb-2" %>
@@ -35,17 +48,107 @@
     <%= form.text_area :recommendation, class: "resize-none text-justify shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", style: "height: auto; min-height: 200px" %>
   </div>
 
+
+  <%# Observation Field %>
+  <div class="mb-6">
+    <%= form.label :observation, class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.text_area :observation, class: "resize-none text-justify shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", style: "height: auto; min-height: 200px", id: 'observation-field' %>
+  </div>
+
+  <%# Recommendation Field %>
+  <div class="mb-6">
+    <%= form.label :recommendation, class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.text_area :recommendation, class: "resize-none text-justify shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", style: "height: auto; min-height: 200px", id: 'recommendation-field' %>
+  </div>
+
+  <%# Action Plan Field %>
+
   <div class="mb-6">
     <%= form.label :action_plan, class: "block text-gray-700 text-sm font-bold mb-2" %>
-    <%= form.text_area :action_plan, class: "resize-none text-justify shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", style: "height: auto; min-height: 200px" %>
+    <%= form.text_area :action_plan, class: "resize-none text-justify shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", style: "height: auto; min-height: 200px", id: 'action-plan-field' %>
   </div>
+
+  <%# Group Selection Field %>
+  <div class="mb-6">
+    <%= form.label :group, class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.select :group, options_for_select(['CS', 'JY', 'YPG', 'YAF', 'M/F', 'W/F', 'ADULT','BRIGADE', 'SINGING_BAND', 'V/R', 'BSPG', 'CHOIR']), { include_blank: true }, { id: 'group-select', class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" } %>
+  </div>
+
 
   <div class="mb-6">
     <%= form.label :timelines, class: "block text-gray-700 text-sm font-bold mb-2" %>
     <%= form.text_area :timelines, class: "resize-none text-justify shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", style: "height: auto; min-height: 200px" %>
   </div>
 
+
+  <%# Attendance Field %>
+  <div class="mb-6" id="attendance-input-container" style="display: none;">
+    <%= form.label :attendance, "Number of Attendance", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.number_field :attendance, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", id: 'attendance-input' %>
+  </div>
+
+  <%# Submit Button %>
+
   <div class="mb-6">
     <%= form.submit class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
   </div>
 <% end %>
+
+<!-- Display Area for User Input -->
+<div id="user-input-display" class="mt-8 p-4 border rounded shadow-md bg-gray-100">
+  <h2 class="text-lg font-bold mb-4">User Input</h2>
+  <p><strong>Date:</strong> <span id="display-date"></span></p>
+  <p><strong>Members on Duty:</strong> <span id="display-members-on-duty"></span></p>
+  <p><strong>Observation:</strong> <span id="display-observation"></span></p>
+  <p><strong>Status:</strong> <span id="display-status"></span></p>
+  <p><strong>Recommendation:</strong> <span id="display-recommendation"></span></p>
+  <p><strong>Action Plan:</strong> <span id="display-action-plan"></span></p>
+  <p><strong>Group:</strong> <span id="display-group"></span></p>
+  <p><strong>Attendance:</strong> <span id="display-attendance"></span></p>
+</div>
+
+<script>
+  document.getElementById('date-field').addEventListener('change', function() {
+    document.getElementById('display-date').textContent = this.value;
+  });
+
+  document.getElementById('members-on-duty-field').addEventListener('input', function() {
+    document.getElementById('display-members-on-duty').textContent = this.value;
+  });
+
+  document.getElementById('observation-field').addEventListener('input', function() {
+    document.getElementById('display-observation').textContent = this.value;
+  });
+
+  document.getElementById('status-field').addEventListener('change', function() {
+    document.getElementById('display-status').textContent = this.options[this.selectedIndex].text;
+  });
+
+  document.getElementById('recommendation-field').addEventListener('input', function() {
+    document.getElementById('display-recommendation').textContent = this.value;
+  });
+
+  document.getElementById('action-plan-field').addEventListener('input', function() {
+    document.getElementById('display-action-plan').textContent = this.value;
+  });
+
+  document.getElementById('group-select').addEventListener('change', function() {
+    const selectedGroup = this.value;
+    const attendanceInputContainer = document.getElementById('attendance-input-container');
+    const displayGroup = document.getElementById('display-group');
+
+    if (selectedGroup) {
+      attendanceInputContainer.style.display = 'block';
+      displayGroup.textContent = selectedGroup;
+    } else {
+      attendanceInputContainer.style.display = 'none';
+      displayGroup.textContent = '';
+    }
+  });
+
+  document.getElementById('attendance-input').addEventListener('input', function() {
+    const attendanceValue = this.value;
+    const displayAttendance = document.getElementById('display-attendance');
+    displayAttendance.textContent = attendanceValue;
+  });
+</script>
