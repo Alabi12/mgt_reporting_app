@@ -1,6 +1,7 @@
 class ReportsController < ApplicationController
-  before_action :authenticate_user!  # Ensure user is authenticated
+  before_action :authenticate_user!
   before_action :set_report, only: [:show, :update, :edit, :destroy]
+
   skip_before_action :set_report, only: %i[index new create summary] # Add summary here
 
   # GET /reports
@@ -86,6 +87,7 @@ class ReportsController < ApplicationController
     redirect_to reports_url, notice: "Report was successfully deleted."
   end
 
+
   # PATCH/PUT /reports/1
   def update
     if @report.update(report_params)
@@ -93,6 +95,12 @@ class ReportsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  # DELETE /reports/1
+  def destroy
+    @report.destroy
+    redirect_to reports_url, notice: "Report was successfully deleted."
   end
 
   private
@@ -104,6 +112,10 @@ class ReportsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def report_params
+
+    params.require(:report).permit(:date, :observation, :status, :recommendation, :action_plan, :members_on_duty)
+
     params.require(:report).permit(:date, :observation, :recommendation, :action_plan, :members_on_duty, :group, :attendance)
+    
   end
 end
