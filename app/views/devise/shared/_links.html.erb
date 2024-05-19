@@ -18,15 +18,3 @@
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
 <% end %>
 
-<% if devise_mapping.omniauthable? %>
-  <% resource_class.omniauth_providers.each do |provider| %>
-    <%= form_for "Login",
-      url: omniauth_authorize_path(resource_name, provider), 
-      method: :post,
-      data: { turbo: "false" } do |f| %>
-        <%= f.button type: "submit", class: "image-button" do %>
-          <%= image_tag("web_light_sq_na@2x.png") %>
-        <% end %>
-    <% end %>
-  <% end %>
-<% end %>
