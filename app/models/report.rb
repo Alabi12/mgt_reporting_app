@@ -7,4 +7,7 @@ class Report < ApplicationRecord
   
     # Define the group attribute
     attribute :group, :string
+    # Define the attendance attribute
+    attribute :attendance, :integer
 end
+
