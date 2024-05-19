@@ -28,6 +28,11 @@
     <%= form.text_area :observation, class: "resize-none text-justify shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", style: "height: auto; min-height: 200px", id: 'observation-field' %>
   </div>
 
+<div class="mb-6">
+  <%= form.label :status, class: "block text-gray-700 text-sm font-bold mb-2" %>
+  <%= form.select :status, options_for_select(Report.statuses.keys.map { |s| [s.humanize, s] }, report.status), {}, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+</div>
+
   <%# Recommendation Field %>
   <div class="mb-6">
     <%= form.label :recommendation, class: "block text-gray-700 text-sm font-bold mb-2" %>
