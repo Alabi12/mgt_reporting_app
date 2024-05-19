@@ -1,6 +1,8 @@
 class Report < ApplicationRecord
     belongs_to :user
 
+    attribute :status, :integer, default: 0
+
     enum status: { not_started: 0, ongoing: 1, completed: 2 }
 
   after_initialize :set_default_status, if: :new_record?
