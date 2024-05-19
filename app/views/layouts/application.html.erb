@@ -8,7 +8,9 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <!-- Include Tailwind CSS via CDN -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
       /* Additional styles can be added here */
       /* Add animation to links */
@@ -23,8 +25,29 @@
   </head>
 
   <body class="bg-gray-100">
-    <div class="mx-auto max-w-lg px-4">
+    <header class="bg-gray-800 text-white text-center py-6">
+      <h1 class="text-3xl font-bold">P.C.G Zimmermann Memorial, Nungua</h1>
+      <h2 class="text-xl mt-2">Session Monthly Report</h2>
+    </header>
+
+    <main class="mx-auto max-w-4xl px-4 py-8"> <!-- Changed max-w-lg to max-w-3xl -->
       <%= yield %>
-    </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center py-6">
+      <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-4">
+        <a href="https://www.linkedin.com/in/robert-alabi/" class="text-blue-400 hover:text-blue-300 animated-link">
+          <i class="fa fa-linkedin fa-2x" style="border: none; color: blue;"></i>
+        </a>
+        <a href="https://twitter.com/worankcode" class="text-blue-400 hover:text-blue-300 animated-link">
+          <i class="fa fa-twitter fa-2x" style="border: none; color: blue;"></i>
+        </a>
+        <a href="https://www.instagram.com/worankcode1/">
+          <i class="fa fa-instagram fa-2x" style="border: none; color: blue;"></i>
+        </a>
+      </div>
+      <p class="mt-4">Powered by: Worank Technologies Ltd</p>
+      <p>Email: worankcode@gmail.com</p>
+    </footer>
   </body>
 </html>
