@@ -5,6 +5,8 @@ class Report < ApplicationRecord
 
   attribute :group, :string
 
+  attribute :attendance, :integer
+
   # Define enum with more descriptive names to avoid conflicts
   enum status: { ongoing: 0, completed: 1, not_started_report: 2 }
 
