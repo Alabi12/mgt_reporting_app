@@ -43,22 +43,22 @@ class ReportsController < ApplicationController
 
   def calculate_date_group_attendance
     date_group_attendance = {}
-
+  
     # Query the database to retrieve all reports
     reports = Report.all
-
+  
     # Iterate through each report to populate the date_group_attendance hash
     reports.each do |report|
       date = report.date.strftime('%Y-%m-%d') # Format date as string
       group = report.group
-      attendance = report.attendance
-
+      attendance = report.attendance || 0 # Ensure attendance is not nil, default to 0 if nil
+  
       # Check if the date already exists in the hash, if not, initialize it
       date_group_attendance[date] ||= {}
-
+  
       # Check if the group already exists for this date, if not, initialize it
       date_group_attendance[date][group] ||= 0
-
+  
       # Add the attendance count to the corresponding group for the date
       date_group_attendance[date][group] += attendance
     end
@@ -73,7 +73,6 @@ class ReportsController < ApplicationController
     end
   
     @report = current_user.reports.build(report_params)
-    @report.status = params[:status] # Assign the selected status
     if @report.save
       redirect_to @report, notice: "Report was successfully created."
     else
@@ -81,13 +80,6 @@ class ReportsController < ApplicationController
     end
   end
   
-  # DELETE /reports/1
-  def destroy
-    @report.destroy
-    redirect_to reports_url, notice: "Report was successfully deleted."
-  end
-
-
   # PATCH/PUT /reports/1
   def update
     if @report.update(report_params)
@@ -112,10 +104,6 @@ class ReportsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def report_params
-
-    params.require(:report).permit(:date, :observation, :status, :recommendation, :action_plan, :members_on_duty)
-
-    params.require(:report).permit(:date, :observation, :recommendation, :action_plan, :members_on_duty, :group, :attendance)
-    
+    params.require(:report).permit(:date, :observation, :status, :recommendation, :action_plan, :members_on_duty, :group, :attendance)
   end
 end
