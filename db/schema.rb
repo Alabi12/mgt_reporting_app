@@ -25,9 +25,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_19_222111) do
     t.datetime "updated_at", null: false
     t.string "members_on_duty"
     t.bigint "user_id", null: false
-    t.integer "status"
     t.string "group"
     t.integer "attendance"
+    t.integer "status"
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
