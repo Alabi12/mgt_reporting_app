@@ -1,16 +1,21 @@
+databases:
+  - name: postgresql
+    databaseName: postgresql
+    user: wolo
+    plan: free
 services:
   - type: web
-    name: reports-app
-    env: ruby
-    buildCommand: bundle install && bundle exec rails db:migrate
-    startCommand: bundle exec puma -C config/puma.rb
+    name: postgresql
+    runtime: ruby
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec rails server"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: reports-db
+          name: postgresql
           property: connectionString
-  databases:
-    - name: reports-db
-      engine: postgresql
-      version: 13
-      initialDiskSizeGB: 10
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: WEB_CONCURRENCY
+        value: 2 # sensible default
