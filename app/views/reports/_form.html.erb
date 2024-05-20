@@ -45,7 +45,50 @@
     <%= form.text_area :timelines, class: "resize-none text-justify shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", style: "height: auto; min-height: 200px" %>
   </div>
 
+  <%# Group Selection Field %>
+  <div class="mb-6">
+    <%= form.label :group, class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.select :group, options_for_select(['CS', 'JY', 'YPG', 'YAF', 'M/F', 'W/F', 'BRIGADE', 'SINGING_BAND', 'V/R', 'BSPG', 'CHOIR']), { include_blank: true }, { id: 'group-select', class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" } %>
+  </div>
+
+   <!-- Attendance Field -->
+  <div class="mb-6" id="attendance-input-container" style="display: none;">
+    <%= form.label :attendance, "Number of Attendance", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.number_field :attendance, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", id: 'attendance-input' %>
+  </div>
+
   <div class="mb-6">
     <%= form.submit class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
   </div>
 <% end %>
+
+
+<!-- Display Area for User Input -->
+<div id="user-input-display" class="mt-8 p-4 border rounded shadow-md bg-gray-100">
+  <h2 class="text-lg font-bold mb-4">User Input</h2>
+  <p><strong>Group:</strong> <span id="display-group"></span></p>
+  <p><strong>Attendance:</strong> <span id="display-attendance"></span></p>
+</div>
+
+<script>
+  document.getElementById('group-select').addEventListener('change', function() {
+    const selectedGroup = this.value;
+    const attendanceInputContainer = document.getElementById('attendance-input-container');
+    const displayGroup = document.getElementById('display-group');
+
+    if (selectedGroup) {
+      attendanceInputContainer.style.display = 'block';
+      displayGroup.textContent = selectedGroup;
+    } else {
+      attendanceInputContainer.style.display = 'none';
+      displayGroup.textContent = '';
+    }
+  });
+
+  document.getElementById('attendance-input').addEventListener('input', function() {
+    const attendanceValue = this.value;
+    const displayAttendance = document.getElementById('display-attendance');
+    displayAttendance.textContent = attendanceValue;
+  });
+
+</script>
