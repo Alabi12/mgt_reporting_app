@@ -49,8 +49,11 @@ class ReportsController < ApplicationController
 
     # Iterate through each report to populate the date_group_attendance hash
     reports.each do |report|
-      next if report.date.nil? # Skip reports with a nil date
-
+      if report.date.nil?
+        Rails.logger.warn "Report #{report.id} has a nil date. Skipping."
+        next
+      end
+      
       date = report.date.strftime('%Y-%m-%d') # Format date as string
       group = report.group
       attendance = report.attendance || 0 # Ensure attendance is not nil, default to 0 if nil
