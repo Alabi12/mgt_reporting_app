@@ -43,25 +43,28 @@ class ReportsController < ApplicationController
 
   def calculate_date_group_attendance
     date_group_attendance = {}
-  
+
     # Query the database to retrieve all reports
     reports = Report.all
-  
+
     # Iterate through each report to populate the date_group_attendance hash
     reports.each do |report|
+      next if report.date.nil? # Skip reports with a nil date
+
       date = report.date.strftime('%Y-%m-%d') # Format date as string
       group = report.group
       attendance = report.attendance || 0 # Ensure attendance is not nil, default to 0 if nil
-  
+
       # Check if the date already exists in the hash, if not, initialize it
       date_group_attendance[date] ||= {}
-  
+
       # Check if the group already exists for this date, if not, initialize it
       date_group_attendance[date][group] ||= 0
-  
+
       # Add the attendance count to the corresponding group for the date
       date_group_attendance[date][group] += attendance
     end
+
     date_group_attendance
   end
 
