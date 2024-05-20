@@ -8,8 +8,8 @@ services:
     name: postgresql
     runtime: ruby
     plan: free
-    buildCommand: "./bin/render-build.sh"
-    startCommand: "bundle exec rails server"
+    buildCommand: bundle install && bundle exec rails db:migrate
+    startCommand: bundle exec puma -C config/puma.rb
     envVars:
       - key: DATABASE_URL
         fromDatabase:
